@@ -30,6 +30,10 @@
             true,
             "multiline"
         ],
+        "no-submodule-imports": false,
+        "object-literal-sort-keys": false,
+        "no-bitwise": false,
+        "jsx-no-lambda": false,
         "align": [
             true,
             "parameters",
