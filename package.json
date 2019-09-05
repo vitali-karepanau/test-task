@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "yarn run tslint --project ."
+    "lint": "yarn run tslint --project . --fix"
   },
   "eslintConfig": {
     "extends": "react-app"

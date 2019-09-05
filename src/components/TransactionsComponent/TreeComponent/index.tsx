@@ -1,13 +1,13 @@
-import * as React from 'react';
 import { TreeSelect } from 'antd';
 import { TreeNodeValue } from 'antd/lib/tree-select/interface';
+import * as React from 'react';
 
 export interface TreeComponentProps {
     style?: {
         [key: string]: string | number;
-    }
+    };
     onChange: (data: TreeNodeValue) => void;
-    data: Array<Item>;
+    data: Item[];
     placeholder: string;
     groupingLabel: string;
     groupingLevel: number;
@@ -18,14 +18,14 @@ export interface Item {
     title: string;
     value: string;
     key: string;
-    children?: Array<Item>;
+    children?: Item[];
 }
 
-const countChildren = (data: TreeNodeValue, list: Array<Item>) => {
+const countChildren = (data: TreeNodeValue, list: Item[]) => {
     let count = 0;
     list.forEach((item: Item) => {
-        const arr = typeof data == 'object' ? [...data] : [data];
-        if (arr.find(row => row == item.value)) {
+        const arr = typeof data === 'object' ? [...data] : [data];
+        if (arr.find(row => row === item.value)) {
             count += sumChildren(0, item);
         } else {
             if (item.children) {
@@ -34,23 +34,23 @@ const countChildren = (data: TreeNodeValue, list: Array<Item>) => {
         }
     });
     return count;
-}
+};
 
 const sumChildren = (count: number, item: Item): number => {
     if (item.children) {
         return item.children.reduce(sumChildren, 0);
     }
     return count + 1;
-}
+};
 
 export const TreeComponent: React.FC<TreeComponentProps> = (props: TreeComponentProps) => {
     const [selected, setSelected] = React.useState<TreeNodeValue>(props.selected);
 
     const maxTagPlaceholderHandler = () => {
-        let count = countChildren(selected, props.data);
+        const count = countChildren(selected, props.data);
 
-        if (props.groupingLevel == 0) {
-            const arr = typeof selected == 'object' ? [...selected] : [selected];
+        if (props.groupingLevel === 0) {
+            const arr = typeof selected === 'object' ? [...selected] : [selected];
             if (count > 1) {
                 return `${props.groupingLabel} (${arr.length})`;
             } else {
@@ -63,18 +63,21 @@ export const TreeComponent: React.FC<TreeComponentProps> = (props: TreeComponent
                     return `${pV}${pV.length > 0 ? ', ' : ''}${cV.value} (${sum})`;
                 }
                 return pV;
-            }, '');
+            },                       '');
         }
     };
 
     const onChangeHandle = (value: TreeNodeValue) => {
         setSelected(value);
         props.onChange(value);
-    }
+    };
 
-    React.useEffect(() => {
-        setSelected(props.selected);
-    }, [props.selected]);
+    React.useEffect(
+        () => {
+            setSelected(props.selected);
+        },
+        [props.selected]
+    );
 
     return (
         <TreeSelect
@@ -90,4 +93,4 @@ export const TreeComponent: React.FC<TreeComponentProps> = (props: TreeComponent
             value={selected}
         />
     );
-}
+};

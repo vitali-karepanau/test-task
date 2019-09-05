@@ -1,8 +1,7 @@
 import React from 'react';
 import { TransactionsComponent } from '../../components';
 
-export const TransactionsContainer = () => {
-    return (
+export const TransactionsContainer = () =>
+    (
         <TransactionsComponent />
     );
-};

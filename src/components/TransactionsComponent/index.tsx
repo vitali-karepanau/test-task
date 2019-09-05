@@ -1,21 +1,13 @@
 import {
     Button,
     Col,
-    Input,
-    Row,
     DatePicker,
-    TreeSelect,
+    Row,
 } from 'antd';
-import React, { useState } from 'react';
-import { Moment } from 'moment';
-import { TreeComponent } from './TreeComponent';
 import { TreeNodeValue } from 'antd/lib/tree-select/interface';
-
-export interface TransactionsComponentProps {
-    // loading: boolean;
-    // onSubmit: (email: string, password: string) => void;
-    // error: string | null;
-}
+import { Moment } from 'moment';
+import React, { useState } from 'react';
+import { TreeComponent } from './TreeComponent';
 
 const { RangePicker } = DatePicker;
 type DatesRange = undefined[] | [Moment] | [undefined, Moment] | [Moment, Moment];
@@ -139,7 +131,7 @@ const data = {
                     value: '100 Ф',
                     key: '0-5',
                 },
-            ]
+            ],
         },
         {
             title: 'Все доп. услуги',
@@ -151,7 +143,7 @@ const data = {
                     value: 'Газ',
                     key: '1-0',
                 },
-            ]
+            ],
         },
     ],
     programmData: [
@@ -165,7 +157,7 @@ const data = {
                     value: 'Выделенная',
                     key: '0-0',
                 },
-            ]
+            ],
         },
         {
             title: 'ЕКА Город',
@@ -177,12 +169,12 @@ const data = {
                     value: 'Общие',
                     key: '1-0',
                 },
-            ]
+            ],
         },
     ],
 };
 
-export const TransactionsComponent = (props: TransactionsComponentProps) => {
+export const TransactionsComponent = () => {
 
     const [dates, setDates] = useState<DatesRange>([]);
     const [fuel, setFuel] = useState<TreeNodeValue>([]);
@@ -208,13 +200,13 @@ export const TransactionsComponent = (props: TransactionsComponentProps) => {
 
     const handleSubmitButtonClick = () => {
         console.log({
-            dates: dates,
-            fuel: fuel,
-            cardTypes: cardTypes,
-            programms: programms,
-            cards: cards,
-            fuelStations: fuelStations,
-            drivers: drivers,
+            dates,
+            fuel,
+            cardTypes,
+            programms,
+            cards,
+            fuelStations,
+            drivers,
         });
     };
 
@@ -227,8 +219,8 @@ export const TransactionsComponent = (props: TransactionsComponentProps) => {
         >
             <Col>
                 <Row>
-                    <RangePicker 
-                        onChange={handleOnChangeRangePicker} 
+                    <RangePicker
+                        onChange={handleOnChangeRangePicker}
                         style={styles.tree}
                         value={dates}
                         placeholder={['Начало', 'Конец']}
@@ -247,7 +239,7 @@ export const TransactionsComponent = (props: TransactionsComponentProps) => {
                     />
                 </Row>
             </Col>
-            
+
             <Col>
                 <Row>
                     <TreeComponent
@@ -315,11 +307,11 @@ export const TransactionsComponent = (props: TransactionsComponentProps) => {
 
                 <Row style={styles.control}>
                     <Col sm={12}>
-                        <Row 
-                            type="flex" 
+                        <Row
+                            type="flex"
                             justify="end"
                         >
-                            <Button 
+                            <Button
                                 onClick={handleClearButtonClick}
                                 type="link"
                             >
@@ -329,11 +321,11 @@ export const TransactionsComponent = (props: TransactionsComponentProps) => {
                     </Col>
 
                     <Col sm={12}>
-                        <Row 
-                            type="flex" 
+                        <Row
+                            type="flex"
                             justify="end"
                         >
-                            <Button 
+                            <Button
                                 onClick={handleSubmitButtonClick}
                                 type="primary"
                             >
